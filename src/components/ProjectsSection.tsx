@@ -1,8 +1,8 @@
 import conservationImage from "@/assets/conservation-project.jpg";
 
-export const ForProjects = () => {
+export const ProjectsSection = () => {
   return (
-    <section className="py-24 bg-secondary">
+    <section id="projects" className="py-24 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div className="relative h-[500px] rounded-lg overflow-hidden">

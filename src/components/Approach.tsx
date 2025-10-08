@@ -17,7 +17,7 @@ export const Approach = () => {
   ];
 
   return (
-    <section className="py-24 bg-secondary">
+    <section id="approach" className="py-24 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
@@ -41,7 +41,7 @@ export const Approach = () => {
           ))}
         </div>
         
-        <div className="mt-20 max-w-4xl mx-auto">
+        <div className="mt-20 max-w-2xl mx-auto">
           <img 
             src={conceptGraphic} 
             alt="Infinity symbol connecting people and conservation projects with growth in the center" 

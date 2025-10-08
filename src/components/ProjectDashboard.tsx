@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 
 export const ProjectDashboard = () => {
   return (
-    <section className="py-24 bg-primary text-primary-foreground">
+    <section id="dashboard" className="py-24 bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 text-center">
         <p className="text-sm font-semibold uppercase tracking-wider mb-4 opacity-90">
           Projects

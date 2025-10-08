@@ -2,9 +2,9 @@ import { Navigation } from "@/components/Navigation";
 import { Hero } from "@/components/Hero";
 import { Approach } from "@/components/Approach";
 import { About } from "@/components/About";
-import { NatureState } from "@/components/NatureState";
+import { NeedSection } from "@/components/NeedSection";
 import { WhyContribute } from "@/components/WhyContribute";
-import { ForProjects } from "@/components/ForProjects";
+import { ProjectsSection } from "@/components/ProjectsSection";
 import { ProjectDashboard } from "@/components/ProjectDashboard";
 
 const Index = () => {
@@ -14,9 +14,9 @@ const Index = () => {
       <Hero />
       <Approach />
       <About />
-      <NatureState />
+      <NeedSection />
       <WhyContribute />
-      <ForProjects />
+      <ProjectsSection />
       <ProjectDashboard />
     </div>
   );
