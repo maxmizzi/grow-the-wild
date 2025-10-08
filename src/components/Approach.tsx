@@ -1,3 +1,5 @@
+import conceptGraphic from "@/assets/concept-graphic.png";
+
 export const Approach = () => {
   const approaches = [
     {
@@ -37,6 +39,14 @@ export const Approach = () => {
               </p>
             </div>
           ))}
+        </div>
+        
+        <div className="mt-20 max-w-4xl mx-auto">
+          <img 
+            src={conceptGraphic} 
+            alt="Infinity symbol connecting people and conservation projects with growth in the center" 
+            className="w-full h-auto"
+          />
         </div>
       </div>
     </section>
