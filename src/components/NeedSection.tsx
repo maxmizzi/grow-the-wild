@@ -10,6 +10,7 @@ export const NeedSection = () => {
               src={natureImage} 
               alt="State of nature" 
               className="w-full h-full object-cover"
+              loading="lazy"
             />
           </div>
           
@@ -17,7 +18,7 @@ export const NeedSection = () => {
             <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
               Need
             </p>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-6">
               The Urgency of Now
             </h2>
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">

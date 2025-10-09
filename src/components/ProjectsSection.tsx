@@ -10,6 +10,7 @@ export const ProjectsSection = () => {
               src={conservationImage} 
               alt="Conservation project" 
               className="w-full h-full object-cover"
+              loading="lazy"
             />
           </div>
           

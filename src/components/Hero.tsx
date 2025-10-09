@@ -12,10 +12,10 @@ export const Hero = () => {
       </div>
       
       <div className="relative z-10 container mx-auto px-4 text-center">
-        <h1 className="font-playfair text-6xl md:text-8xl font-bold mb-6 text-white animate-fade-in leading-tight">
+        <h1 className="font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-6 text-white animate-fade-in leading-tight">
           Grow The Wild
         </h1>
-        <p className="text-lg md:text-xl mb-10 text-white/90 max-w-2xl mx-auto animate-fade-in font-light">
+        <p className="text-base sm:text-lg md:text-xl mb-10 text-white/90 max-w-2xl mx-auto animate-fade-in font-light">
           Connect with impactful wildlife conservation projects and help restore our planet's biodiversity
         </p>
         <Button 

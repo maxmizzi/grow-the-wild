@@ -24,7 +24,10 @@ export const About = () => {
                 Every project is carefully curated, independently monitored, and regularly evaluated to ensure your support creates real, lasting change for wildlife.
               </p>
             </div>
-            <Button className="mt-8 bg-primary hover:bg-primary/90 text-primary-foreground">
+            <Button 
+              size="lg"
+              className="mt-8 bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4"
+            >
               Register Interest
             </Button>
           </div>
@@ -34,6 +37,7 @@ export const About = () => {
               src={aboutImage} 
               alt="Wildlife conservation" 
               className="w-full h-full object-cover"
+              loading="lazy"
             />
           </div>
         </div>

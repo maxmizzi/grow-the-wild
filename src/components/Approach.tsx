@@ -23,7 +23,7 @@ export const Approach = () => {
           <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
             Our Approach
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-6">
             Building a Wilder Future Together
           </h2>
         </div>
@@ -41,11 +41,12 @@ export const Approach = () => {
           ))}
         </div>
         
-        <div className="mt-20 max-w-2xl mx-auto">
+        <div className="mt-20 max-w-lg mx-auto">
           <img 
             src={conceptGraphic} 
             alt="Infinity symbol connecting people and conservation projects with growth in the center" 
             className="w-full h-auto"
+            loading="lazy"
           />
         </div>
       </div>
