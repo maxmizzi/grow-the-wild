@@ -26,11 +26,11 @@ export const Navigation = () => {
         {/* Desktop Buttons */}
         <div className="hidden md:flex items-center gap-4">
           <Link to="/for-projects">
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
+            <Button style={{backgroundColor: '#264831', color: '#ffffff'}} className="hover:opacity-90">
               For Projects/Landowners
             </Button>
           </Link>
-          <Button className="bg-foreground text-background hover:bg-foreground/90">
+          <Button style={{backgroundColor: 'hsl(218 52% 20%)', color: 'hsl(0 0% 100%)'}} className="hover:opacity-90">
             Contact Us
           </Button>
         </div>
@@ -85,11 +85,11 @@ export const Navigation = () => {
             {/* Mobile Buttons */}
             <div className="flex flex-col items-center space-y-4 mt-8">
               <Link to="/for-projects" onClick={closeMenu}>
-                <Button className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 text-lg">
+                <Button style={{backgroundColor: '#264831', color: '#ffffff'}} className="hover:opacity-90 px-8 py-3 text-lg">
                   For Projects/Landowners
                 </Button>
               </Link>
-              <Button className="bg-foreground text-background hover:bg-foreground/90 px-8 py-3 text-lg">
+              <Button style={{backgroundColor: 'hsl(218 52% 20%)', color: 'hsl(0 0% 100%)'}} className="hover:opacity-90 px-8 py-3 text-lg">
                 Contact Us
               </Button>
             </div>

@@ -26,7 +26,8 @@ export const About = () => {
             </div>
             <Button 
               size="lg"
-              className="mt-8 bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4"
+              style={{backgroundColor: '#264831', color: '#ffffff'}}
+              className="mt-8 hover:opacity-90 px-8 py-4"
             >
               Register Interest
             </Button>

@@ -1,8 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/Navigation";
+import { useEffect } from "react";
 import projectImage from "@/assets/tree-plant.jpg";
 
 export const ForProjectsPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -43,25 +47,26 @@ export const ForProjectsPage = () => {
       </section>
 
       {/* Second Section - Projects Style */}
-      <section className="py-24 bg-primary text-primary-foreground">
+      <section className="py-24 bg-secondary">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
             For Projects
           </h2>
-          <p className="text-xl mb-8 max-w-3xl mx-auto opacity-90">
+          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
             We are actively taking on new founding projects across a wide range of scales and types, from estates to agriculture, rewilding to focused conservation.
           </p>
           
-          <div className="mt-16 max-w-2xl mx-auto bg-background/10 backdrop-blur-sm rounded-lg p-12 border border-primary-foreground/20">
-            <h3 className="text-2xl font-bold mb-4">
+          <div className="mt-16 max-w-2xl mx-auto bg-background/50 backdrop-blur-sm rounded-lg p-12 border border-border">
+            <h3 className="text-2xl font-bold text-foreground mb-4">
               Register Your Interest
             </h3>
-            <p className="text-lg mb-8 opacity-90">
+            <p className="text-lg text-muted-foreground mb-8">
               We'd love to talk and explore if we can help fund your project
             </p>
             <Button 
               size="lg"
-              className="bg-background text-foreground hover:bg-background/90"
+              style={{backgroundColor: '#264831', color: '#ffffff'}}
+              className="hover:opacity-90"
             >
               Let's Talk
             </Button>

@@ -1,4 +1,6 @@
 import conservationImage from "@/assets/conservation-project.jpg";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 export const ProjectsSection = () => {
   return (
@@ -32,6 +34,15 @@ export const ProjectsSection = () => {
                 Join our network of verified conservation initiatives and tap into a growing community of passionate supporters ready to fund meaningful impact.
               </p>
             </div>
+            <Link to="/for-projects">
+              <Button 
+                size="lg"
+                style={{backgroundColor: '#264831', color: '#ffffff'}}
+                className="mt-8 hover:opacity-90 px-8 py-4"
+              >
+                For Projects/Landowners
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
