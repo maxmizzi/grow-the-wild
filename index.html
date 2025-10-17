@@ -10,15 +10,37 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://growthewild.earth/" />
     <meta property="og:title" content="Grow The Wild - Wildlife Conservation Platform" />
     <meta property="og:description" content="Connect with impactful wildlife conservation projects and help restore our planet's biodiversity through verified, high-impact initiatives." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:image" content="https://growthewild.earth/og-image.jpg" />
 
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta name="twitter:url" content="https://growthewild.earth/" />
+    <meta name="twitter:title" content="Grow The Wild - Wildlife Conservation Platform" />
+    <meta name="twitter:description" content="Connect with impactful wildlife conservation projects and help restore our planet's biodiversity through verified, high-impact initiatives." />
+    <meta name="twitter:image" content="https://growthewild.earth/og-image.jpg" />
+
+    <!-- Single Page Apps for GitHub Pages -->
+    <script type="text/javascript">
+      // This script checks to see if a redirect is present and if so it converts
+      // the redirect path back into a path and uses the history API to make it
+      // appear like the user directly accessed the path
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
   </head>
 
   <body>
