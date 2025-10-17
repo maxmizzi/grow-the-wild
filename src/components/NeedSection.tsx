@@ -21,7 +21,7 @@ export const NeedSection = () => {
   return (
     <section id="need" className="py-24 bg-secondary">
       <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Left Column - Data Visualization (on desktop) */}
           <div className="space-y-6 order-2 lg:order-1">
             <div className="relative h-[300px] rounded-lg overflow-hidden">
@@ -33,14 +33,14 @@ export const NeedSection = () => {
               />
             </div>
 
-            <div className="bg-card p-6 rounded-lg border">
-              <h3 className="text-xl font-semibold mb-4 text-foreground">UK Biodiversity Decline</h3>
+            <div className="bg-card p-4 sm:p-6 rounded-lg border">
+              <h3 className="text-lg sm:text-xl font-semibold mb-4 text-foreground">UK Biodiversity Decline</h3>
               <p className="text-sm text-muted-foreground mb-6">
                 Data from State of Nature 2023 Report
               </p>
               
               <ChartContainer config={chartConfig} className="h-[300px] w-full">
-                <BarChart data={speciesData} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
+                <BarChart data={speciesData} margin={{ top: 20, right: 10, left: 0, bottom: 60 }}>
                   <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
                   <XAxis 
                     dataKey="category" 
