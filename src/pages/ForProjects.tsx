@@ -7,6 +7,7 @@ export const ForProjectsPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -24,13 +25,10 @@ export const ForProjectsPage = () => {
                   Are you running a landowner looking to fund a wildlife conservation project?
                 </p>
                 <p>
-                  We're building a platform that connects dedicated conservationists with supporters who want to fund projects like yours.
+                  We're building a platform to connect high-impact conservation projects with passionate supporters who want to make a real difference for wildlife and ecosystems.
                 </p>
                 <p>
-                  We help conservation projects access sustainable funding while building engaged communities around their work.
-                </p>
-                <p>
-                  Join our network of verified conservation initiatives and tap into a growing community of passionate supporters ready to fund meaningful impact.
+                  Through rigorous vetting, transparent monitoring, and engaged community building, we help projects access sustainable funding while delivering measurable impact.
                 </p>
               </div>
             </div>
@@ -40,6 +38,7 @@ export const ForProjectsPage = () => {
                 src={projectImage} 
                 alt="Conservation project" 
                 className="w-full h-full object-cover"
+                loading="lazy"
               />
             </div>
           </div>
@@ -76,5 +75,3 @@ export const ForProjectsPage = () => {
     </div>
   );
 };
-
-export default ForProjectsPage;
