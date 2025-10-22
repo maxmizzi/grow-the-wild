@@ -18,12 +18,14 @@ export const Hero = () => {
         <p className="text-base sm:text-lg md:text-xl mb-10 text-white/90 max-w-2xl mx-auto animate-fade-in font-light">
           Connect with impactful wildlife conservation projects and help restore our planet's biodiversity
         </p>
-        <Button 
-          size="lg"
-          className="bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-sm font-medium px-10 py-6 text-base animate-fade-in transition-all"
-        >
-          Learn More
-        </Button>
+        <a href="/#approach">
+          <Button 
+            size="lg"
+            className="bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-sm font-medium px-10 py-6 text-base animate-fade-in transition-all"
+          >
+            Learn More
+          </Button>
+        </a>
       </div>
     </section>
   );

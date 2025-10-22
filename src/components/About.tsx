@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import aboutImage from "@/assets/about-image.jpg";
+import { RegisterInterestDialog } from "./RegisterInterestDialog";
 
 export const About = () => {
   return (
@@ -24,13 +25,15 @@ export const About = () => {
                 Every project is carefully curated, independently monitored, and regularly evaluated to ensure your support creates real, lasting change for wildlife.
               </p>
             </div>
-            <Button 
-              size="lg"
-              style={{backgroundColor: '#264831', color: '#ffffff'}}
-              className="mt-8 hover:opacity-90 px-8 py-4"
-            >
-              Register Interest
-            </Button>
+            <RegisterInterestDialog>
+              <Button 
+                size="lg"
+                style={{backgroundColor: '#264831', color: '#ffffff'}}
+                className="mt-8 hover:opacity-90 px-8 py-4"
+              >
+                Register Interest
+              </Button>
+            </RegisterInterestDialog>
           </div>
           
           <div className="relative h-[600px] rounded-lg overflow-hidden">

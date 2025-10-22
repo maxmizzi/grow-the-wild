@@ -40,7 +40,7 @@ export const ProjectsSection = () => {
                 style={{backgroundColor: '#264831', color: '#ffffff'}}
                 className="mt-8 hover:opacity-90 px-8 py-4"
               >
-                For Projects/Landowners
+                For Projects & Landowners
               </Button>
             </Link>
           </div>

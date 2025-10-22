@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import logo from "@/assets/logo.png";
+import { RegisterInterestDialog } from "./RegisterInterestDialog";
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,19 +22,18 @@ export const Navigation = () => {
           <Link to="/projects" className="text-foreground hover:text-primary transition-colors">Explore Projects</Link>
           <a href="/#approach" className="text-foreground hover:text-primary transition-colors">Our Approach</a>
           <a href="/#need" className="text-foreground hover:text-primary transition-colors">Why Grow the Wild</a>
-          <a href="/#dashboard" className="text-foreground hover:text-primary transition-colors">Get Started</a>
         </div>
         
         {/* Desktop Buttons */}
         <div className="hidden md:flex items-center gap-4">
-          <Link to="/for-projects">
-            <Button style={{backgroundColor: '#264831', color: '#ffffff'}} className="hover:opacity-90">
-              For Projects/Landowners
-            </Button>
+          <Link to="/for-projects" className="text-foreground hover:text-primary transition-colors">
+            For Projects & Landowners
           </Link>
-          <Button style={{backgroundColor: 'hsl(218 52% 20%)', color: 'hsl(0 0% 100%)'}} className="hover:opacity-90">
-            Contact Us
-          </Button>
+          <RegisterInterestDialog>
+            <Button style={{backgroundColor: 'hsl(218 52% 20%)', color: 'hsl(0 0% 100%)'}} className="hover:opacity-90">
+              Register Interest
+            </Button>
+          </RegisterInterestDialog>
         </div>
 
         {/* Mobile Hamburger Button */}
@@ -82,24 +82,17 @@ export const Navigation = () => {
             >
               Why Grow the Wild
             </a>
-            <a 
-              href="/#dashboard" 
-              className="text-2xl font-medium text-foreground hover:text-primary transition-colors"
-              onClick={closeMenu}
-            >
-              Get Started
-            </a>
             
             {/* Mobile Buttons */}
             <div className="flex flex-col items-center space-y-4 mt-8">
-              <Link to="/for-projects" onClick={closeMenu}>
-                <Button style={{backgroundColor: '#264831', color: '#ffffff'}} className="hover:opacity-90 px-8 py-3 text-lg">
-                  For Projects/Landowners
-                </Button>
+              <Link to="/for-projects" onClick={closeMenu} className="text-foreground hover:text-primary transition-colors text-lg">
+                For Projects & Landowners
               </Link>
-              <Button style={{backgroundColor: 'hsl(218 52% 20%)', color: 'hsl(0 0% 100%)'}} className="hover:opacity-90 px-8 py-3 text-lg">
-                Contact Us
-              </Button>
+              <RegisterInterestDialog>
+                <Button style={{backgroundColor: 'hsl(218 52% 20%)', color: 'hsl(0 0% 100%)'}} className="hover:opacity-90 px-8 py-3 text-lg">
+                  Register Interest
+                </Button>
+              </RegisterInterestDialog>
             </div>
           </div>
         </div>
