@@ -4,7 +4,7 @@
 
 Grow the Wild platform connecting nature conservation projects with  supporters who want to make a tangible difference in UK nature restoration.
 
-## 🚀 Tech Stack
+## Tech Stack
 
 ### Frontend Framework
 - **React 18.3.1** - Component-based UI library
