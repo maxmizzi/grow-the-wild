@@ -18,6 +18,7 @@ export const Navigation = () => {
         
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
+          <Link to="/projects" className="text-foreground hover:text-primary transition-colors">Explore Projects</Link>
           <a href="/#approach" className="text-foreground hover:text-primary transition-colors">Our Approach</a>
           <a href="/#need" className="text-foreground hover:text-primary transition-colors">Why Grow the Wild</a>
           <a href="/#dashboard" className="text-foreground hover:text-primary transition-colors">Get Started</a>
@@ -60,6 +61,13 @@ export const Navigation = () => {
         >
           <div className="flex flex-col items-center justify-start pt-8 pb-12 space-y-8" style={{backgroundColor: '#ffffff'}}>
             {/* Mobile Navigation Links */}
+            <Link 
+              to="/projects" 
+              className="text-2xl font-medium text-foreground hover:text-primary transition-colors"
+              onClick={closeMenu}
+            >
+              Explore Projects
+            </Link>
             <a 
               href="/#approach" 
               className="text-2xl font-medium text-foreground hover:text-primary transition-colors"
