@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import aboutImage from "@/assets/about-image.jpg";
+import aboutImage from "@/assets/about-image.webp";
 import { RegisterInterestDialog } from "./RegisterInterestDialog";
 
 export const About = () => {

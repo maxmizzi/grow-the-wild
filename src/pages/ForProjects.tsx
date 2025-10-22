@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/Navigation";
 import { useEffect } from "react";
-import projectImage from "@/assets/tree-plant.jpg";
+import projectImage from "@/assets/tree-plant.webp";
 
 export const ForProjectsPage = () => {
   useEffect(() => {

@@ -1,4 +1,4 @@
-import conservationImage from "@/assets/conservation-project.jpg";
+import conservationImage from "@/assets/conservation-project.webp";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 

@@ -1,7 +1,7 @@
-import { Project } from '@/types/project';
-import ancientWoodlandImage from '@/assets/project-assets/ancientwoodland.jpg';
-import meadowImage from '@/assets/project-assets/meadowing.png';
-import hedgeImage from '@/assets/project-assets/hedge.jpg';
+import { Project, ProjectStatus, EcosystemType, ConservationType, ActivityLevel } from '@/types/project';
+import ancientWoodlandImage from '@/assets/project-assets/ancientwoodland.webp';
+import meadowImage from '@/assets/project-assets/meadowing.webp';
+import hedgeImage from '@/assets/project-assets/hedge.webp';
 
 export const mockProjects: Project[] = [
   {

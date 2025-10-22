@@ -1,5 +1,5 @@
 import { Leaf, BookOpen, Target } from "lucide-react";
-import wildlifeImage from "@/assets/wildlife.jpg";
+import wildlifeImage from "@/assets/wildlife.webp";
 
 export const WhyContribute = () => {
   const reasons = [

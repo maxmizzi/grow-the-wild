@@ -1,4 +1,4 @@
-import natureImage from "@/assets/nature-state.jpg";
+import natureImage from "@/assets/nature-state.webp";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from "recharts";
 import { TrendingDown, TrendingUp } from "lucide-react";
