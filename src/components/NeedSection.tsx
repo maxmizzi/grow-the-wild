@@ -1,80 +1,21 @@
-import natureImage from "@/assets/nature-state.webp";
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from "recharts";
+import needImage from "@/assets/need.webp";
 import { TrendingDown, TrendingUp } from "lucide-react";
-
-const speciesData = [
-  { category: "All Species", decline: 19, label: "Average decline" },
-  { category: "Flowering Plants", decline: 54, label: "Distribution loss" },
-  { category: "Birds", decline: 43, label: "At risk" },
-  { category: "Amphibians & Reptiles", decline: 31, label: "At risk" },
-];
-
-const chartConfig = {
-  decline: {
-    label: "Decline %",
-    color: "hsl(var(--chart-1))",
-  },
-};
 
 export const NeedSection = () => {
   return (
     <section id="need" className="py-24 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Left Column - Data Visualization (on desktop) */}
+          {/* Left Column - Image (on desktop) */}
           <div className="space-y-6 order-2 lg:order-1">
-            <div className="relative h-[300px] rounded-lg overflow-hidden">
+            <div className="relative h-[600px] rounded-lg overflow-hidden">
               <img 
-                src={natureImage} 
-                alt="State of nature" 
+                src={needImage} 
+                alt="Nature conservation" 
                 className="w-full h-full object-cover"
                 loading="lazy"
               />
-            </div>
-
-            <div className="bg-card p-4 sm:p-6 rounded-lg border">
-              <h3 className="text-lg sm:text-xl font-semibold mb-4 text-foreground">UK Biodiversity Decline</h3>
-              <p className="text-sm text-muted-foreground mb-6">
-                Data from State of Nature 2023 Report
-              </p>
-              
-              <ChartContainer config={chartConfig} className="h-[300px] w-full">
-                <BarChart data={speciesData} margin={{ top: 20, right: 10, left: 0, bottom: 60 }}>
-                  <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                  <XAxis 
-                    dataKey="category" 
-                    angle={-45}
-                    textAnchor="end"
-                    height={80}
-                    className="text-xs"
-                  />
-                  <YAxis 
-                    label={{ value: '% Decline/At Risk', angle: -90, position: 'insideLeft' }}
-                    className="text-xs"
-                  />
-                  <ChartTooltip 
-                    content={<ChartTooltipContent />}
-                    cursor={{ fill: 'hsl(var(--muted))' }}
-                  />
-                  <Bar 
-                    dataKey="decline" 
-                    fill="var(--color-decline)" 
-                    radius={[8, 8, 0, 0]}
-                  />
-                </BarChart>
-              </ChartContainer>
-
-              <div className="mt-4 grid grid-cols-2 gap-4 text-center">
-                <div className="bg-muted/50 p-3 rounded">
-                  <p className="text-2xl font-bold text-foreground">16%</p>
-                  <p className="text-xs text-muted-foreground">Species at risk</p>
-                </div>
-                <div className="bg-primary/10 p-3 rounded">
-                  <p className="text-2xl font-bold text-primary">150+</p>
-                  <p className="text-xs text-muted-foreground">Species helped by conservation</p>
-                </div>
-              </div>
+              <div className="absolute inset-0 bg-[#264831]/15"></div>
             </div>
           </div>
 
@@ -89,9 +30,9 @@ export const NeedSection = () => {
               </h2>
             </div>
 
-            <div className="space-y-6 text-base text-muted-foreground leading-relaxed">
-              <div className="bg-destructive/10 border-l-4 border-destructive p-4 rounded-r">
-                <p className="font-semibold text-destructive mb-2 flex items-center gap-2">
+            <div className="space-y-8 text-base text-muted-foreground leading-relaxed">
+              <div className="bg-primary/10 border-l-4 border-primary p-4 rounded-r">
+                <p className="font-semibold text-primary mb-2 flex items-center gap-2">
                   <TrendingDown className="h-5 w-5" />
                   The Challenge
                 </p>

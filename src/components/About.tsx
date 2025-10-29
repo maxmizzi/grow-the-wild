@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import aboutImage from "@/assets/about-image.webp";
+import aboutImage from "@/assets/about.webp";
 import { RegisterInterestDialog } from "./RegisterInterestDialog";
 
 export const About = () => {
@@ -11,18 +11,18 @@ export const About = () => {
             <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
               About
             </p>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight mb-6">
               Grow The Wild
             </h2>
-            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
+            <div className="space-y-8 text-lg text-muted-foreground leading-relaxed">
               <p>
-                We're building a platform that connects passionate individuals with vetted, high-impact wildlife conservation projects around the world.
+                We are building a platform that connects individuals who care about wildlife, nature and conservation with vetted, high-impact wildlife conservation projects in the UK.
               </p>
               <p>
                 Through our platform, you'll discover meaningful ways to support conservation, learn about ecosystems and species, and witness the tangible impact of your contributions.
               </p>
               <p>
-                Every project is carefully curated, independently monitored, and regularly evaluated to ensure your support creates real, lasting change for wildlife.
+                Every project is carefully curated, independently monitored, and regularly evaluated to ensure your support creates real, lasting benfit for wildlife.
               </p>
             </div>
             <RegisterInterestDialog>
@@ -43,6 +43,7 @@ export const About = () => {
               className="w-full h-full object-cover"
               loading="lazy"
             />
+            <div className="absolute inset-0 bg-[#264831]/10"></div>
           </div>
         </div>
       </div>

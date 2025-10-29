@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { mockSponsorship } from "@/data/mockSponsorship";
 import { Calendar, MapPin, Sprout, TrendingUp } from "lucide-react";
 import { formatCurrency } from "@/types/project";
+import { Link } from "react-router-dom";
 
 // Simple markdown parser for bold (**text**) and italic (*text*)
 function parseSimpleMarkdown(text: string): string {
@@ -213,13 +214,15 @@ export const SponsorDashboard = () => {
               <p className="mb-4" style={{color: '#264831', opacity: 0.8}}>
                 Explore more conservation projects and expand your portfolio
               </p>
-              <Button 
-                size="lg"
-                style={{backgroundColor: '#264831', color: '#ffffff'}}
-                className="hover:opacity-90"
-              >
-                Browse Projects
-              </Button>
+              <Link to="/projects">
+                <Button 
+                  size="lg"
+                  style={{backgroundColor: '#264831', color: '#ffffff'}}
+                  className="hover:opacity-90"
+                >
+                  Browse Projects
+                </Button>
+              </Link>
             </Card>
           </div>
         </div>

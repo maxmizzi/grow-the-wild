@@ -19,9 +19,9 @@ export const Navigation = () => {
         
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
-          <Link to="/projects" className="text-foreground hover:text-primary transition-colors">Explore Projects</Link>
           <a href="/#approach" className="text-foreground hover:text-primary transition-colors">Our Approach</a>
           <a href="/#need" className="text-foreground hover:text-primary transition-colors">Why Grow the Wild</a>
+          <Link to="/projects" className="text-foreground hover:text-primary transition-colors">Explore Projects</Link>
         </div>
         
         {/* Desktop Buttons */}
@@ -30,10 +30,15 @@ export const Navigation = () => {
             For Projects & Landowners
           </Link>
           <RegisterInterestDialog>
-            <Button style={{backgroundColor: 'hsl(218 52% 20%)', color: 'hsl(0 0% 100%)'}} className="hover:opacity-90">
+            <Button style={{backgroundColor: '#264831', color: '#ffffff'}} className="hover:opacity-90">
               Register Interest
             </Button>
           </RegisterInterestDialog>
+          <Link to="/dashboard">
+            <Button variant="outline" style={{borderColor: '#264831', color: '#264831'}} className="hover:bg-green-50">
+              Login
+            </Button>
+          </Link>
         </div>
 
         {/* Mobile Hamburger Button */}
@@ -61,13 +66,6 @@ export const Navigation = () => {
         >
           <div className="flex flex-col items-center justify-start pt-8 pb-12 space-y-8" style={{backgroundColor: '#ffffff'}}>
             {/* Mobile Navigation Links */}
-            <Link 
-              to="/projects" 
-              className="text-2xl font-medium text-foreground hover:text-primary transition-colors"
-              onClick={closeMenu}
-            >
-              Explore Projects
-            </Link>
             <a 
               href="/#approach" 
               className="text-2xl font-medium text-foreground hover:text-primary transition-colors"
@@ -82,6 +80,13 @@ export const Navigation = () => {
             >
               Why Grow the Wild
             </a>
+            <Link 
+              to="/projects" 
+              className="text-2xl font-medium text-foreground hover:text-primary transition-colors"
+              onClick={closeMenu}
+            >
+              Explore Projects
+            </Link>
             
             {/* Mobile Buttons */}
             <div className="flex flex-col items-center space-y-4 mt-8">
@@ -89,10 +94,15 @@ export const Navigation = () => {
                 For Projects & Landowners
               </Link>
               <RegisterInterestDialog>
-                <Button style={{backgroundColor: 'hsl(218 52% 20%)', color: 'hsl(0 0% 100%)'}} className="hover:opacity-90 px-8 py-3 text-lg">
+                <Button style={{backgroundColor: '#264831', color: '#ffffff'}} className="hover:opacity-90 px-8 py-3 text-lg">
                   Register Interest
                 </Button>
               </RegisterInterestDialog>
+              <Link to="/dashboard" onClick={closeMenu}>
+                <Button variant="outline" style={{borderColor: '#264831', color: '#264831'}} className="hover:bg-green-50 px-8 py-3 text-lg">
+                  Login
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

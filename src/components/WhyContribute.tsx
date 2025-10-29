@@ -28,7 +28,7 @@ export const WhyContribute = () => {
             <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
               Why Contribute
             </p>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-12">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight mb-12">
               Why Support Conservation Through Grow The Wild?
             </h2>
             
@@ -51,14 +51,18 @@ export const WhyContribute = () => {
                 </div>
               ))}
             </div>
-          </div>
           
+            <p className="text-muted-foreground leading-relaxed mt-8">
+               Join our community of wildlife supporters! For the price of your weekly coffee you can sponsor and protect up to 1,000 m<sup>2</sup> of wildlife habitat. 
+            </p>
+          </div>
           <div className="relative h-[600px] rounded-lg overflow-hidden">
             <img 
               src={wildlifeImage} 
               alt="Wildlife" 
               className="w-full h-full object-cover"
             />
+            <div className="absolute inset-0 bg-[#264831]/10"></div>
           </div>
         </div>
       </div>

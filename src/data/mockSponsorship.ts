@@ -1,8 +1,10 @@
-import { SponsorshipWithProject } from '@/types/sponsorship';
+import { Sponsorship, SponsorshipWithProject } from '@/types/sponsorship';
 import ancientWoodlandImage from '@/assets/project-assets/ancientwoodland.webp';
-import treePlantingImage from '@/assets/tree-project-update.png';
-import badgerImage from '@/assets/badger.jpg';
-import oakImage from '@/assets/oak.jpg';
+import treePlantingImage from '@/assets/project-assets/tree-project-update.webp';
+import badgerImage from '@/assets/project-assets/badger.webp';
+import oakImage from '@/assets/project-assets/oak.webp';
+import englandWoodImage from '@/assets/project-assets/england-wood.webp';
+import fungiImage from '@/assets/project-assets/fungi.webp';
 
 export const mockSponsorship: SponsorshipWithProject = {
   sponsorship: {
@@ -19,7 +21,7 @@ export const mockSponsorship: SponsorshipWithProject = {
     id: '1',
     title: 'West Sussex Woodland Restoration',
     summary: 'Restore 10 hectares of ancient woodland in West Sussex',
-    image_url: ancientWoodlandImage,
+    image_url: englandWoodImage,
     habitat_type: 'Ancient Woodland',
     location: 'West Sussex',
     funding_target: 20000,
@@ -61,6 +63,40 @@ We'll continue monitoring this family group and sharing updates on their activit
       media_url: badgerImage,
       media_caption: 'Camera trap image capturing badger emerging from sett at dusk',
       highlights: ['Badger family discovered', 'Ecosystem engineers', 'Pest control service', 'Seed dispersal', 'Soil health'],
+    },
+    {
+      id: 'update-005',
+      project_id: '1',
+      title: 'Autumn Fungi Survey: A Hidden World Revealed',
+      body: `Autumn has arrived at our restoration site, and with it comes the most spectacular fungi season we could have hoped for! Our recent survey has documented over 20 different fungal species fruiting across the woodland - a fantastic indicator of ecosystem health.
+
+**Star Find: Bearded Tooth (Hericium erinaceus)**
+Among the many species recorded, we were thrilled to discover the Bearded Tooth fungus growing on a veteran oak. This rare saprotroph is classified as Near Threatened in the UK and is a true indicator of ancient woodland. Finding it here validates the ecological importance of our restoration work.
+
+**Other Notable Species:**
+We've also documented Fly Agaric, various Russulas, Honey Fungus, Dead Man's Fingers, and multiple bracket fungi species including Turkey Tail and Artist's Bracket. Each plays a vital role in the woodland ecosystem.
+
+**The Invisible Majority:**
+What we see as mushrooms is merely the fruiting body - think of it as the apple on a tree. The real organism is the mycelium, a vast underground network of thread-like structures that can extend for kilometers through the soil and wood. Some mycelia are thought to be among the oldest and largest organisms on Earth, with ages exceeding 1,000 years.
+
+**Woodland Decomposers:**
+Fungi are nature's ultimate recyclers. They break down dead wood, leaf litter, and organic matter, releasing nutrients back into the soil that trees and plants need to grow. Without fungi, our forests would be buried under centuries of undecomposed material.
+
+**The Wood Wide Web:**
+Many fungi form mycorrhizal partnerships with trees - a symbiotic relationship where the fungus provides the tree with water and nutrients (especially phosphorus and nitrogen) while receiving sugars from photosynthesis in return. These mycorrhizal networks can connect multiple trees, allowing them to share resources and even communicate chemical signals about threats like disease or drought.
+
+**Why This Matters:**
+The diversity and abundance of fungi we're seeing - particularly rare species like Bearded Tooth - indicates that our woodland has retained much of its ecological integrity despite decades of neglect. This gives us an excellent foundation for restoration. Healthy fungal communities will accelerate soil development and support the establishment of our newly planted trees.
+
+**Did You Know?**
+A single teaspoon of healthy woodland soil can contain several miles of fungal hyphae! This underground network is often called the "Wood Wide Web" for its role in connecting and supporting forest life.
+
+We'll be conducting seasonal fungi surveys to track how the community develops as our restoration progresses.`,
+      published_at: '2025-10-02T14:00:00Z',
+      visibility: 'public',
+      media_url: fungiImage,
+      media_caption: 'A cluster of fungi photographed during our autumn survey',
+      highlights: ['20+ fungi species', 'Rare Bearded Tooth found', 'Mycorrhizal networks', 'Woodland decomposers', 'Ancient woodland indicator'],
     },
     {
       id: 'update-003',

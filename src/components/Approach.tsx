@@ -4,15 +4,15 @@ export const Approach = () => {
   const approaches = [
     {
       title: "Collective Impact",
-      description: "Harness the power of community funding to create lasting change for wildlife and wild places across the globe"
+      description: "Harness the power of community funding to create wild places and lasting change for wildlife"
     },
     {
       title: "Education First",
-      description: "Build deep connections with nature through engaging content, expert insights, and transformative learning experiences"
+      description: "Build your connections with nature through engaging content, expert insights and a sense of ownership"
     },
     {
       title: "Measurable Outcomes",
-      description: "Track real results through transparent project reporting, verified impact metrics, and tangible conservation wins"
+      description: "Track real results through in-depth project reporting, metrics & data and tangible conservation wins"
     }
   ];
 
@@ -23,7 +23,7 @@ export const Approach = () => {
           <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
             Our Approach
           </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight mb-6">
             Building a Wilder Future Together
           </h2>
         </div>
