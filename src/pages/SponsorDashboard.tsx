@@ -1,4 +1,5 @@
 import { Navigation } from "@/components/Navigation";
+import { DemoBanner } from "@/components/DemoBanner";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -31,8 +32,9 @@ export const SponsorDashboard = () => {
   return (
     <div className="min-h-screen" style={{backgroundColor: '#264831'}}>
       <Navigation />
+      <DemoBanner />
       
-      <div className="pt-24 pb-16">
+      <div className="pt-16 pb-16">
         <div className="container mx-auto px-4">
           {/* Header */}
           <div className="mb-8">
