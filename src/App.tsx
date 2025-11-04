@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { useAnalytics } from "./hooks/useAnalytics";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { ForProjectsPage } from "./pages/ForProjects";
@@ -13,12 +14,18 @@ import { SponsorDashboard } from "./pages/SponsorDashboard";
 
 const queryClient = new QueryClient();
 
+const AnalyticsWrapper = () => {
+  useAnalytics();
+  return null;
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <AnalyticsWrapper />
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import logo from "@/assets/logo.png";
 import { RegisterInterestDialog } from "./RegisterInterestDialog";
+import { trackEvent } from "../hooks/useAnalytics";
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,14 +20,36 @@ export const Navigation = () => {
         
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
-          <a href="/#approach" className="text-foreground hover:text-primary transition-colors">Our Approach</a>
-          <a href="/#need" className="text-foreground hover:text-primary transition-colors">Why Grow the Wild</a>
-          <Link to="/projects" className="text-foreground hover:text-primary transition-colors">Explore Projects</Link>
+          <a 
+            href="/#approach" 
+            className="text-foreground hover:text-primary transition-colors"
+            onClick={() => trackEvent('navigation_click', { destination: 'Our Approach' })}
+          >
+            Our Approach
+          </a>
+          <a 
+            href="/#need" 
+            className="text-foreground hover:text-primary transition-colors"
+            onClick={() => trackEvent('navigation_click', { destination: 'Why Grow the Wild' })}
+          >
+            Why Grow the Wild
+          </a>
+          <Link 
+            to="/projects" 
+            className="text-foreground hover:text-primary transition-colors"
+            onClick={() => trackEvent('navigation_click', { destination: 'Explore Projects' })}
+          >
+            Explore Projects
+          </Link>
         </div>
         
         {/* Desktop Buttons */}
         <div className="hidden md:flex items-center gap-4">
-          <Link to="/for-projects" className="text-foreground hover:text-primary transition-colors">
+          <Link 
+            to="/for-projects" 
+            className="text-foreground hover:text-primary transition-colors"
+            onClick={() => trackEvent('navigation_click', { destination: 'For Projects & Landowners' })}
+          >
             For Projects & Landowners
           </Link>
           <RegisterInterestDialog>
@@ -69,28 +92,44 @@ export const Navigation = () => {
             <a 
               href="/#approach" 
               className="text-2xl font-medium text-foreground hover:text-primary transition-colors"
-              onClick={closeMenu}
+              onClick={() => {
+                trackEvent('navigation_click', { destination: 'Our Approach', device: 'mobile' });
+                closeMenu();
+              }}
             >
               Our Approach
             </a>
             <a 
               href="/#need" 
               className="text-2xl font-medium text-foreground hover:text-primary transition-colors"
-              onClick={closeMenu}
+              onClick={() => {
+                trackEvent('navigation_click', { destination: 'Why Grow the Wild', device: 'mobile' });
+                closeMenu();
+              }}
             >
               Why Grow the Wild
             </a>
             <Link 
               to="/projects" 
               className="text-2xl font-medium text-foreground hover:text-primary transition-colors"
-              onClick={closeMenu}
+              onClick={() => {
+                trackEvent('navigation_click', { destination: 'Explore Projects', device: 'mobile' });
+                closeMenu();
+              }}
             >
               Explore Projects
             </Link>
             
             {/* Mobile Buttons */}
             <div className="flex flex-col items-center space-y-4 mt-8">
-              <Link to="/for-projects" onClick={closeMenu} className="text-foreground hover:text-primary transition-colors text-lg">
+              <Link 
+                to="/for-projects" 
+                onClick={() => {
+                  trackEvent('navigation_click', { destination: 'For Projects & Landowners', device: 'mobile' });
+                  closeMenu();
+                }} 
+                className="text-foreground hover:text-primary transition-colors text-lg"
+              >
                 For Projects & Landowners
               </Link>
               <RegisterInterestDialog>
