@@ -1,22 +1,22 @@
 import { SpeciesCard, SpeciesCollection } from '../types/species';
 
-// Import card images
-import BarnOwlCard from '@/assets/cards/Barn Owl.png';
-import HedgehogCard from '@/assets/cards/European Hedgehog.png';
-import BadgerCard from '@/assets/cards/Badger.png';
-import PineMartinCard from '@/assets/cards/Pine Martin.png';
-import RedSquirrelCard from '@/assets/cards/Red Squirrel.png';
-import PalmateNewtCard from '@/assets/cards/Palmate Newt.png';
-import PipistrelleBatCard from '@/assets/cards/Pipistrelle Bat.png';
-import LesserSpottedWoodpeckerCard from '@/assets/cards/Lesser Spotted Woodpecker.png';
-import GardenBumblebeeCard from '@/assets/cards/Garden Bumblebee.png';
-import TansyBeetleCard from '@/assets/cards/Tansy Beetle.png';
-import SwallowtailCard from '@/assets/cards/Native British Swallowtail.png';
-import BlackPoplarCard from '@/assets/cards/Black Poplar.png';
-import WildServiceTreeCard from '@/assets/cards/Wild Service Tree.png';
-import HorsehairLichenCard from '@/assets/cards/Horsehair Lichen.png';
-import HarbourPorpoiseCard from '@/assets/cards/Harbour Porpose.png';
-import SeahorseCard from '@/assets/cards/Short-snouted Seahorse.png';
+// Import card images (WebP optimized)
+import BarnOwlCard from '@/assets/cards/Barn Owl.webp';
+import HedgehogCard from '@/assets/cards/European Hedgehog.webp';
+import BadgerCard from '@/assets/cards/Badger.webp';
+import PineMartinCard from '@/assets/cards/Pine Martin.webp';
+import RedSquirrelCard from '@/assets/cards/Red Squirrel.webp';
+import PalmateNewtCard from '@/assets/cards/Palmate Newt.webp';
+import PipistrelleBatCard from '@/assets/cards/Pipistrelle Bat.webp';
+import LesserSpottedWoodpeckerCard from '@/assets/cards/Lesser Spotted Woodpecker.webp';
+import GardenBumblebeeCard from '@/assets/cards/Garden Bumblebee.webp';
+import TansyBeetleCard from '@/assets/cards/Tansy Beetle.webp';
+import SwallowtailCard from '@/assets/cards/Native British Swallowtail.webp';
+import BlackPoplarCard from '@/assets/cards/Black Poplar.webp';
+import WildServiceTreeCard from '@/assets/cards/Wild Service Tree.webp';
+import HorsehairLichenCard from '@/assets/cards/Horsehair Lichen.webp';
+import HarbourPorpoiseCard from '@/assets/cards/Harbour Porpose.webp';
+import SeahorseCard from '@/assets/cards/Short-snouted Seahorse.webp';
 
 // All species available (discovered)
 const allSpecies: SpeciesCard[] = [
