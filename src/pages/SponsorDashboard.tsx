@@ -136,7 +136,7 @@ export const SponsorDashboard = () => {
           </div>
 
           {/* Two Column Layout: Left (Updates) | Right (Species Cards - Sticky) */}
-          <div className="lg:grid lg:grid-cols-12 lg:gap-8">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-8 mt-8">
             
             {/* LEFT COLUMN - Project Updates (60-65%) */}
             <div className="lg:col-span-7">
@@ -223,7 +223,7 @@ export const SponsorDashboard = () => {
             </div>
 
             {/* RIGHT COLUMN - Species Cards (35-40%) */}
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-5 mt-10 lg:mt-0">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-2xl font-bold" style={{color: '#ffffff'}}>Species</h2>
                 <Badge variant="outline" style={{borderColor: 'rgba(255, 255, 255, 0.3)', color: '#ffffff'}}>{mockSpeciesCollection.totalSpecies} species</Badge>
