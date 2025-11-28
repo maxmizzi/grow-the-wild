@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { mockSponsorship } from "@/data/mockSponsorship";
+import { mockSpeciesCollection } from "../data/mockSpecies";
+import { SpeciesCards } from "../components/SpeciesCards";
 import { Calendar, MapPin, Sprout, TrendingUp } from "lucide-react";
 import { formatCurrency } from "@/types/project";
 import { Link } from "react-router-dom";
@@ -64,7 +66,7 @@ export const SponsorDashboard = () => {
             </div>
           </Card>
 
-          {/* Project Card */}
+          {/* Project Card - Full Width */}
           <div className="mb-8">
             <h2 className="text-2xl font-bold mb-4" style={{color: '#ffffff'}}>Your Sponsored Project</h2>
             
@@ -133,85 +135,113 @@ export const SponsorDashboard = () => {
             </Card>
           </div>
 
-          {/* Project Updates */}
-          <div>
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl font-bold" style={{color: '#ffffff'}}>Project Updates</h2>
-              <Badge variant="outline" style={{borderColor: 'rgba(255, 255, 255, 0.3)', color: '#ffffff'}}>{updates.length} updates</Badge>
-            </div>
+          {/* Two Column Layout: Left (Updates) | Right (Species Cards - Sticky) */}
+          <div className="lg:grid lg:grid-cols-12 lg:gap-8">
+            
+            {/* LEFT COLUMN - Project Updates (60-65%) */}
+            <div className="lg:col-span-7">
+              
+              {/* Project Updates - Scrollable Container */}
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-2xl font-bold" style={{color: '#ffffff'}}>Project Updates</h2>
+                  <Badge variant="outline" style={{borderColor: 'rgba(255, 255, 255, 0.3)', color: '#ffffff'}}>{updates.length} updates</Badge>
+                </div>
 
-            <div className="space-y-6">
-              {updates.map((update) => (
-                <Card key={update.id} className="p-6">
-                  <details className="group">
-                    <summary className="cursor-pointer list-none">
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2">
-                            <h3 className="text-xl font-bold text-foreground mb-1">{update.title}</h3>
-                            <span className="text-sm text-muted-foreground group-open:rotate-180 transition-transform">▼</span>
-                          </div>
-                          <p className="text-sm text-muted-foreground flex items-center gap-2">
-                            <Calendar className="w-4 h-4" />
-                            {formatDate(update.published_at)}
-                            {update.visibility === 'sponsor_only' && (
-                              <Badge variant="secondary" className="ml-2">Sponsor Only</Badge>
+                {/* Scrollable Updates Card Container */}
+                <Card className="p-6 max-h-[800px] overflow-y-auto">
+                  <div className="space-y-4">
+                    {updates.map((update) => (
+                      <div key={update.id} className="border-b last:border-b-0 pb-4 last:pb-0">
+                        <details className="group">
+                          <summary className="cursor-pointer list-none">
+                            <div className="flex items-start justify-between mb-2">
+                              <div className="flex-1">
+                                <div className="flex items-center gap-2">
+                                  <h3 className="text-lg font-bold text-foreground">{update.title}</h3>
+                                  <span className="text-sm text-muted-foreground group-open:rotate-180 transition-transform">▼</span>
+                                </div>
+                                <p className="text-sm text-muted-foreground flex items-center gap-2 mt-1">
+                                  <Calendar className="w-4 h-4" />
+                                  {formatDate(update.published_at)}
+                                  {update.visibility === 'sponsor_only' && (
+                                    <Badge variant="secondary" className="ml-2">Sponsor Only</Badge>
+                                  )}
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Highlights */}
+                            {update.highlights && update.highlights.length > 0 && (
+                              <div className="mb-2 flex flex-wrap gap-2">
+                                {update.highlights.map((highlight, idx) => (
+                                  <Badge 
+                                    key={idx} 
+                                    variant="outline" 
+                                    style={{borderColor: '#264831', color: '#264831'}}
+                                    className="font-normal text-xs"
+                                  >
+                                    {highlight}
+                                  </Badge>
+                                ))}
+                              </div>
                             )}
-                          </p>
-                        </div>
+                          </summary>
+
+                          <div className="mt-4">
+                            {/* Update Image */}
+                            {update.media_url && (
+                              <div className="mb-4">
+                                <img 
+                                  src={update.media_url} 
+                                  alt={update.media_caption || update.title}
+                                  className="w-full max-w-md aspect-square object-cover rounded-lg"
+                                />
+                              </div>
+                            )}
+                            {update.media_caption && (
+                              <p className="text-sm text-muted-foreground mb-4 italic">
+                                {update.media_caption}
+                              </p>
+                            )}
+
+                            {/* Update Body */}
+                            <div className="prose prose-sm max-w-none">
+                              <div 
+                                className="text-muted-foreground whitespace-pre-line text-sm"
+                                dangerouslySetInnerHTML={{ __html: parseSimpleMarkdown(update.body) }}
+                              />
+                            </div>
+                          </div>
+                        </details>
                       </div>
-
-                      {/* Highlights */}
-                      {update.highlights && update.highlights.length > 0 && (
-                        <div className="mb-4 flex flex-wrap gap-2">
-                          {update.highlights.map((highlight, idx) => (
-                            <Badge 
-                              key={idx} 
-                              variant="outline" 
-                              style={{borderColor: '#264831', color: '#264831'}}
-                              className="font-normal"
-                            >
-                              {highlight}
-                            </Badge>
-                          ))}
-                        </div>
-                      )}
-                    </summary>
-
-                    <div className="mt-4">
-                      {/* Update Image */}
-                      {update.media_url && (
-                        <div className="mb-4">
-                          <img 
-                            src={update.media_url} 
-                            alt={update.media_caption || update.title}
-                            className="w-full max-w-md aspect-square object-cover rounded-lg"
-                          />
-                        </div>
-                      )}
-                      {update.media_caption && (
-                        <p className="text-sm text-muted-foreground mb-4 italic">
-                          {update.media_caption}
-                        </p>
-                      )}
-
-                      {/* Update Body */}
-                      <div className="prose prose-sm max-w-none">
-                        <div 
-                          className="text-muted-foreground whitespace-pre-line"
-                          dangerouslySetInnerHTML={{ __html: parseSimpleMarkdown(update.body) }}
-                        />
-                      </div>
-                    </div>
-                  </details>
+                    ))}
+                  </div>
                 </Card>
-              ))}
+              </div>
+
             </div>
+
+            {/* RIGHT COLUMN - Species Cards (35-40%) */}
+            <div className="lg:col-span-5">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-2xl font-bold" style={{color: '#ffffff'}}>Species</h2>
+                <Badge variant="outline" style={{borderColor: 'rgba(255, 255, 255, 0.3)', color: '#ffffff'}}>{mockSpeciesCollection.totalSpecies} species</Badge>
+              </div>
+              
+              <SpeciesCards 
+                discovered={mockSpeciesCollection.discovered}
+                locked={mockSpeciesCollection.locked}
+                totalSpecies={mockSpeciesCollection.totalSpecies}
+                isMobile={false}
+              />
+            </div>
+
           </div>
 
-          {/* Empty State / CTA */}
-          <div className="flex justify-center">
-            <Card className="p-8 mt-8 text-center" style={{backgroundColor: '#e8f5e9', width: '65%'}}>
+          {/* CTA - Bottom of page on all screen sizes */}
+          <div className="flex justify-center mt-8">
+            <Card className="p-8 text-center" style={{backgroundColor: '#e8f5e9'}}>
               <h3 className="text-xl font-bold mb-2" style={{color: '#264831'}}>Want to make more impact?</h3>
               <p className="mb-4" style={{color: '#264831', opacity: 0.8}}>
                 Explore more conservation projects and expand your portfolio
@@ -227,6 +257,7 @@ export const SponsorDashboard = () => {
               </Link>
             </Card>
           </div>
+
         </div>
       </div>
     </div>
