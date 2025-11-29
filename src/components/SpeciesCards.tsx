@@ -115,7 +115,7 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
             className="flex-1 overflow-x-auto overflow-y-hidden snap-x snap-mandatory scrollbar-hide flex items-center" 
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            <div className="flex items-center px-4 gap-4 h-full" style={{ width: `${allSpecies.length * 85}vw` }}>
+            <div className="flex items-center px-4 gap-3 h-full" style={{ width: `${allSpecies.length * 70}vw` }}>
               {allSpecies.map((species, index) => {
                 const isCenter = index === currentIndex;
                 return (
@@ -123,9 +123,9 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
                     key={species.id}
                     className={`snap-center flex-shrink-0 transition-all duration-300`}
                     style={{ 
-                      width: isCenter ? '70vw' : '50vw',
-                      height: 'calc(70vw * 4 / 3)', // Maintain 3:4 aspect ratio based on largest card
-                      opacity: isCenter ? 1 : 0.5
+                      width: isCenter ? '65vw' : '40vw',
+                      height: 'calc(65vw * 4 / 3)', // Fixed height based on center card (3:4 aspect ratio)
+                      opacity: isCenter ? 1 : 0.6
                     }}
                     onClick={() => {
                       setCurrentIndex(index);
@@ -133,14 +133,16 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
                     }}
                   >
                     <div className="w-full h-full rounded-lg overflow-hidden cursor-pointer flex items-center justify-center">
-                      <img 
-                        src={species.imageUrl} 
-                        alt={species.commonName}
-                        className="w-full h-full object-cover object-top"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = 'https://placehold.co/600x800/e8f5e9/264831?text=?';
-                        }}
-                      />
+                      <div className={`${isCenter ? 'w-full h-full' : 'w-full'}`} style={{ height: isCenter ? '100%' : 'calc(40vw * 4 / 3)' }}>
+                        <img 
+                          src={species.imageUrl} 
+                          alt={species.commonName}
+                          className="w-full h-full object-cover object-top"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = 'https://placehold.co/600x800/e8f5e9/264831?text=?';
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
                 );
