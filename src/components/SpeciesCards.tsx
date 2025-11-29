@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { SpeciesCard } from "../types/species";
 import { getStatusColor } from "../data/mockSpecies";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 interface SpeciesCardsProps {
   discovered: SpeciesCard[];
@@ -16,10 +16,29 @@ interface SpeciesCardsProps {
 export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedCard, setSelectedCard] = useState<SpeciesCard | null>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   
   // All species are available
   const allSpecies = discovered.length > 0 ? discovered : [];
   const currentSpecies = allSpecies[currentIndex];
+
+  // Handle scroll for mobile carousel
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const scrollLeft = container.scrollLeft;
+      const cardWidth = container.clientWidth * 0.7; // 70vw
+      const newIndex = Math.round(scrollLeft / cardWidth);
+      if (newIndex !== currentIndex && newIndex >= 0 && newIndex < allSpecies.length) {
+        setCurrentIndex(newIndex);
+      }
+    };
+
+    container.addEventListener('scroll', handleScroll);
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, [currentIndex, allSpecies.length]);
 
   const handlePrevious = () => {
     setCurrentIndex((prev) => (prev === 0 ? allSpecies.length - 1 : prev - 1));
@@ -36,8 +55,8 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
   return (
     <>
       <Card className="p-6 max-h-[800px] overflow-hidden flex flex-col">
-        {/* Main Card Display with Side Navigation - Takes available space */}
-        <div className="relative flex items-center justify-center gap-2 flex-1 min-h-0">
+        {/* Desktop: Main Card Display with Side Navigation */}
+        <div className="hidden md:flex relative items-center justify-center gap-2 flex-1 min-h-0">
           
           {/* Left Arrow */}
           <Button
@@ -89,8 +108,56 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
           </Button>
         </div>
 
-        {/* Counter and Thumbnail Carousel - Fixed at bottom */}
-        <div className="relative flex-shrink-0 mt-4">
+        {/* Mobile: Swipeable Carousel with Large Center Card */}
+        <div className="md:hidden flex-1 min-h-0 flex flex-col">
+          <div 
+            ref={scrollContainerRef}
+            className="flex-1 overflow-x-auto overflow-y-hidden snap-x snap-mandatory scrollbar-hide flex items-center" 
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            <div className="flex items-center px-4 gap-4 h-full" style={{ width: `${allSpecies.length * 85}vw` }}>
+              {allSpecies.map((species, index) => {
+                const isCenter = index === currentIndex;
+                return (
+                  <div
+                    key={species.id}
+                    className={`snap-center flex-shrink-0 transition-all duration-300`}
+                    style={{ 
+                      width: isCenter ? '70vw' : '50vw',
+                      height: 'calc(70vw * 4 / 3)', // Maintain 3:4 aspect ratio based on largest card
+                      opacity: isCenter ? 1 : 0.5
+                    }}
+                    onClick={() => {
+                      setCurrentIndex(index);
+                      if (isCenter) setSelectedCard(species);
+                    }}
+                  >
+                    <div className="w-full h-full rounded-lg overflow-hidden cursor-pointer flex items-center justify-center">
+                      <img 
+                        src={species.imageUrl} 
+                        alt={species.commonName}
+                        className="w-full h-full object-cover object-top"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = 'https://placehold.co/600x800/e8f5e9/264831?text=?';
+                        }}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          
+          {/* Counter for mobile */}
+          <div className="flex items-center justify-center mt-3">
+            <span className="text-sm text-muted-foreground">
+              {currentIndex + 1} / {allSpecies.length}
+            </span>
+          </div>
+        </div>
+
+        {/* Desktop: Counter and Thumbnail Carousel */}
+        <div className="hidden md:block relative flex-shrink-0 mt-4">
           <div className="flex items-center justify-center mb-3">
             <span className="text-sm text-muted-foreground">
               {currentIndex + 1} / {allSpecies.length}
@@ -142,74 +209,79 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
           className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
           onClick={() => setSelectedCard(null)}
         >
-          <Card className="max-w-5xl w-full p-8 relative" onClick={(e: React.MouseEvent) => e.stopPropagation()}>
-            {/* Close button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute top-4 right-4"
-              onClick={() => setSelectedCard(null)}
-            >
-              <X className="h-4 w-4" />
-            </Button>
+          <Card 
+            className="w-full max-w-5xl max-h-[90vh] overflow-y-auto relative" 
+            onClick={() => setSelectedCard(null)}
+          >
+            <div className="p-4 md:p-8">
+              {/* Close button */}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute top-2 right-2 md:top-4 md:right-4 z-10"
+                onClick={() => setSelectedCard(null)}
+              >
+                <X className="h-4 w-4" />
+              </Button>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Large Image */}
-              <div className="w-full aspect-[3/4] rounded-lg overflow-hidden">
-                <img 
-                  src={selectedCard.imageUrl} 
-                  alt={selectedCard.commonName}
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = 'https://placehold.co/600x800/e8f5e9/264831?text=' + 
-                      selectedCard.commonName.replace(' ', '+');
-                  }}
-                />
-              </div>
-
-              {/* Details */}
-              <div className="flex flex-col">
-                <h3 className="text-3xl font-bold text-foreground mb-2">{selectedCard.commonName}</h3>
-                <p className="text-base text-muted-foreground italic mb-6">{selectedCard.scientificName}</p>
-
-                <div className="space-y-5 flex-1">
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-2">Conservation Status</p>
-                    <Badge className={`text-sm ${getStatusColor(selectedCard.conservationStatus)}`}>
-                      {selectedCard.conservationStatus}
-                    </Badge>
-                  </div>
-
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-2">Habitat</p>
-                    <p className="text-base text-foreground">{selectedCard.habitat}</p>
-                  </div>
-
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-2">Fun Fact</p>
-                    <p className="text-base text-foreground">{selectedCard.funFact}</p>
-                  </div>
-
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-2">Discovered</p>
-                    <p className="text-base text-foreground">
-                      {new Date(selectedCard.discoveredDate).toLocaleDateString('en-GB', {
-                        day: 'numeric',
-                        month: 'long',
-                        year: 'numeric'
-                      })}
-                    </p>
-                  </div>
+              <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+                {/* Large Image */}
+                <div className="w-full aspect-[3/4] rounded-lg overflow-hidden">
+                  <img 
+                    src={selectedCard.imageUrl} 
+                    alt={selectedCard.commonName}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = 'https://placehold.co/600x800/e8f5e9/264831?text=' + 
+                        selectedCard.commonName.replace(' ', '+');
+                    }}
+                  />
                 </div>
 
-                <Button 
-                  variant="outline" 
-                  className="w-full mt-6"
-                  style={{borderColor: '#264831', color: '#264831'}}
-                  onClick={() => setSelectedCard(null)}
-                >
-                  Close
-                </Button>
+                {/* Details */}
+                <div className="flex flex-col">
+                  <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-2">{selectedCard.commonName}</h3>
+                  <p className="text-sm md:text-base text-muted-foreground italic mb-4 md:mb-6">{selectedCard.scientificName}</p>
+
+                  <div className="space-y-4 md:space-y-5 flex-1">
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-2">Conservation Status</p>
+                      <Badge className={`text-sm ${getStatusColor(selectedCard.conservationStatus)}`}>
+                        {selectedCard.conservationStatus}
+                      </Badge>
+                    </div>
+
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-2">Habitat</p>
+                      <p className="text-sm md:text-base text-foreground">{selectedCard.habitat}</p>
+                    </div>
+
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-2">Fun Fact</p>
+                      <p className="text-sm md:text-base text-foreground">{selectedCard.funFact}</p>
+                    </div>
+
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-2">Discovered</p>
+                      <p className="text-sm md:text-base text-foreground">
+                        {new Date(selectedCard.discoveredDate).toLocaleDateString('en-GB', {
+                          day: 'numeric',
+                          month: 'long',
+                          year: 'numeric'
+                        })}
+                      </p>
+                    </div>
+                  </div>
+
+                  <Button 
+                    variant="outline" 
+                    className="w-full mt-4 md:mt-6"
+                    style={{borderColor: '#264831', color: '#264831'}}
+                    onClick={() => setSelectedCard(null)}
+                  >
+                    Close
+                  </Button>
+                </div>
               </div>
             </div>
           </Card>
