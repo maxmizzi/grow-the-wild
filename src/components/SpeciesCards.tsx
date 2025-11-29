@@ -58,7 +58,7 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
         }
       });
       
-      // Small timeout to finalize after scrolling stops
+      // After scrolling stops, snap to the centered card
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
         const containerCenter = container.scrollLeft + container.clientWidth / 2;
@@ -81,7 +81,14 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
         if (closestIndex !== currentIndex) {
           setCurrentIndex(closestIndex);
         }
-      }, 50);
+        
+        // Snap to center the card properly
+        const closestCard = cards[closestIndex] as HTMLElement;
+        const cardCenter = closestCard.offsetLeft + closestCard.offsetWidth / 2;
+        const targetScroll = cardCenter - container.clientWidth / 2;
+        
+        container.scrollTo({ left: targetScroll, behavior: 'smooth' });
+      }, 100);
     };
 
     container.addEventListener('scroll', handleScroll, { passive: true });
