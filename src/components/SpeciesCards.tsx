@@ -27,18 +27,70 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
+    let rafId: number;
+    let scrollTimeout: NodeJS.Timeout;
+    
     const handleScroll = () => {
-      const scrollLeft = container.scrollLeft;
-      const cardWidth = container.clientWidth * 0.7; // 70vw
-      const newIndex = Math.round(scrollLeft / cardWidth);
-      if (newIndex !== currentIndex && newIndex >= 0 && newIndex < allSpecies.length) {
-        setCurrentIndex(newIndex);
-      }
+      // Cancel any pending animation frame
+      if (rafId) cancelAnimationFrame(rafId);
+      
+      // Use requestAnimationFrame for smooth updates
+      rafId = requestAnimationFrame(() => {
+        const containerCenter = container.scrollLeft + container.clientWidth / 2;
+        const cards = container.children[0].children;
+        
+        let closestIndex = 0;
+        let closestDistance = Infinity;
+        
+        for (let i = 0; i < cards.length; i++) {
+          const card = cards[i] as HTMLElement;
+          const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+          const distance = Math.abs(containerCenter - cardCenter);
+          
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestIndex = i;
+          }
+        }
+        
+        if (closestIndex !== currentIndex) {
+          setCurrentIndex(closestIndex);
+        }
+      });
+      
+      // Small timeout to finalize after scrolling stops
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        const containerCenter = container.scrollLeft + container.clientWidth / 2;
+        const cards = container.children[0].children;
+        
+        let closestIndex = 0;
+        let closestDistance = Infinity;
+        
+        for (let i = 0; i < cards.length; i++) {
+          const card = cards[i] as HTMLElement;
+          const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+          const distance = Math.abs(containerCenter - cardCenter);
+          
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestIndex = i;
+          }
+        }
+        
+        if (closestIndex !== currentIndex) {
+          setCurrentIndex(closestIndex);
+        }
+      }, 50);
     };
 
-    container.addEventListener('scroll', handleScroll);
-    return () => container.removeEventListener('scroll', handleScroll);
-  }, [currentIndex, allSpecies.length]);
+    container.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      clearTimeout(scrollTimeout);
+      container.removeEventListener('scroll', handleScroll);
+    };
+  }, [currentIndex]);
 
   const handlePrevious = () => {
     setCurrentIndex((prev) => (prev === 0 ? allSpecies.length - 1 : prev - 1));
@@ -112,37 +164,60 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
         <div className="md:hidden flex-1 min-h-0 flex flex-col">
           <div 
             ref={scrollContainerRef}
-            className="flex-1 overflow-x-auto overflow-y-hidden snap-x snap-mandatory scrollbar-hide flex items-center" 
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            className="overflow-x-scroll overflow-y-hidden snap-x snap-mandatory scrollbar-hide" 
+            style={{ 
+              scrollbarWidth: 'none', 
+              msOverflowStyle: 'none',
+              height: 'calc(65vw * 4 / 3)' // Lock to largest card height (3:4 aspect ratio)
+            }}
           >
-            <div className="flex items-center px-4 gap-3 h-full" style={{ width: `${allSpecies.length * 70}vw` }}>
+            <div className="flex items-center h-full" style={{ paddingLeft: 'calc((100vw - 65vw) / 2)', paddingRight: 'calc((100vw - 65vw) / 2)' }}>
               {allSpecies.map((species, index) => {
                 const isCenter = index === currentIndex;
                 return (
                   <div
                     key={species.id}
-                    className={`snap-center flex-shrink-0 transition-all duration-300`}
+                    className="flex-shrink-0 snap-center"
                     style={{ 
-                      width: isCenter ? '65vw' : '40vw',
-                      height: 'calc(65vw * 4 / 3)', // Fixed height based on center card (3:4 aspect ratio)
-                      opacity: isCenter ? 1 : 0.6
+                      width: isCenter ? '65vw' : '45vw',
+                      marginLeft: index === 0 ? 0 : '2vw',
+                      marginRight: index === allSpecies.length - 1 ? 0 : '2vw',
+                      transition: 'all 0.3s ease-in-out'
                     }}
                     onClick={() => {
-                      setCurrentIndex(index);
-                      if (isCenter) setSelectedCard(species);
+                      const container = scrollContainerRef.current;
+                      if (container && !isCenter) {
+                        // Calculate scroll position to center this card
+                        const cards = container.children[0].children;
+                        let scrollPosition = 0;
+                        for (let i = 0; i < index; i++) {
+                          scrollPosition += (cards[i] as HTMLElement).offsetWidth + (i === 0 ? 0 : parseFloat(getComputedStyle(cards[i] as HTMLElement).marginLeft));
+                        }
+                        container.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+                        setCurrentIndex(index);
+                      } else if (isCenter) {
+                        setSelectedCard(species);
+                      }
                     }}
                   >
-                    <div className="w-full h-full rounded-lg overflow-hidden cursor-pointer flex items-center justify-center">
-                      <div className={`${isCenter ? 'w-full h-full' : 'w-full'}`} style={{ height: isCenter ? '100%' : 'calc(40vw * 4 / 3)' }}>
-                        <img 
-                          src={species.imageUrl} 
-                          alt={species.commonName}
-                          className="w-full h-full object-cover object-top"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src = 'https://placehold.co/600x800/e8f5e9/264831?text=?';
-                          }}
-                        />
-                      </div>
+                    <div 
+                      className="rounded-lg overflow-hidden cursor-pointer"
+                      style={{
+                        width: '100%',
+                        aspectRatio: '3/4',
+                        opacity: isCenter ? 1 : 0.6,
+                        transform: isCenter ? 'scale(1)' : 'scale(0.95)',
+                        transition: 'all 0.3s ease-in-out'
+                      }}
+                    >
+                      <img 
+                        src={species.imageUrl} 
+                        alt={species.commonName}
+                        className="w-full h-full object-cover object-top"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = 'https://placehold.co/600x800/e8f5e9/264831?text=?';
+                        }}
+                      />
                     </div>
                   </div>
                 );
