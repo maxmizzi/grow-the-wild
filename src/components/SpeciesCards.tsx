@@ -168,10 +168,10 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
             style={{ 
               scrollbarWidth: 'none', 
               msOverflowStyle: 'none',
-              height: 'calc(65vw * 4 / 3)' // Lock to largest card height (3:4 aspect ratio)
+              height: 'calc(60vw * 4 / 3)' // Lock to largest card height (3:4 aspect ratio)
             }}
           >
-            <div className="flex items-center h-full" style={{ paddingLeft: 'calc((100vw - 65vw) / 2)', paddingRight: 'calc((100vw - 65vw) / 2)' }}>
+            <div className="flex items-center h-full gap-[0.5vw]" style={{ paddingLeft: 'calc((100vw - 60vw) / 2)', paddingRight: 'calc((100vw - 60vw) / 2)' }}>
               {allSpecies.map((species, index) => {
                 const isCenter = index === currentIndex;
                 return (
@@ -179,20 +179,16 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
                     key={species.id}
                     className="flex-shrink-0 snap-center"
                     style={{ 
-                      width: isCenter ? '65vw' : '45vw',
-                      marginLeft: index === 0 ? 0 : '2vw',
-                      marginRight: index === allSpecies.length - 1 ? 0 : '2vw',
+                      width: '60vw',
                       transition: 'all 0.3s ease-in-out'
                     }}
                     onClick={() => {
                       const container = scrollContainerRef.current;
                       if (container && !isCenter) {
                         // Calculate scroll position to center this card
-                        const cards = container.children[0].children;
-                        let scrollPosition = 0;
-                        for (let i = 0; i < index; i++) {
-                          scrollPosition += (cards[i] as HTMLElement).offsetWidth + (i === 0 ? 0 : parseFloat(getComputedStyle(cards[i] as HTMLElement).marginLeft));
-                        }
+                        const cardWidth = container.clientWidth * 0.60; // 60vw
+                        const gap = container.clientWidth * 0.005; // 0.5vw
+                        const scrollPosition = index * (cardWidth + gap);
                         container.scrollTo({ left: scrollPosition, behavior: 'smooth' });
                         setCurrentIndex(index);
                       } else if (isCenter) {
@@ -205,8 +201,8 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
                       style={{
                         width: '100%',
                         aspectRatio: '3/4',
-                        opacity: isCenter ? 1 : 0.6,
-                        transform: isCenter ? 'scale(1)' : 'scale(0.95)',
+                        opacity: isCenter ? 1 : 0.5,
+                        transform: isCenter ? 'scale(1)' : 'scale(0.75)',
                         transition: 'all 0.3s ease-in-out'
                       }}
                     >
@@ -226,8 +222,8 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
           </div>
           
           {/* Counter for mobile */}
-          <div className="flex items-center justify-center mt-3">
-            <span className="text-sm text-muted-foreground">
+          <div className="flex items-center justify-center mt-4">
+            <span className="text-base font-medium text-muted-foreground">
               {currentIndex + 1} / {allSpecies.length}
             </span>
           </div>
