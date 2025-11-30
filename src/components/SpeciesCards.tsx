@@ -140,10 +140,12 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
             style={{ 
               scrollbarWidth: 'none', 
               msOverflowStyle: 'none',
-              height: 'calc(60vw * 4 / 3)' // Lock to largest card height (3:4 aspect ratio)
+              height: 'calc(60vw * 4 / 3)', // Lock to largest card height (3:4 aspect ratio)
+              scrollPaddingLeft: 'calc((100vw - 60vw) / 2)',
+              scrollPaddingRight: 'calc((100vw - 60vw) / 2)'
             }}
           >
-            <div className="flex items-center h-full gap-[0.5vw]" style={{ paddingLeft: 'calc((100vw - 60vw) / 2)', paddingRight: 'calc((100vw - 60vw) / 2)' }}>
+            <div className="flex items-center h-full" style={{ paddingLeft: 'calc((100vw - 60vw) / 2)', paddingRight: 'calc((100vw - 60vw) / 2)' }}>
               {allSpecies.map((species, index) => {
                 const isCenter = index === currentIndex;
                 return (
@@ -153,18 +155,17 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
                     className="flex-shrink-0 snap-center"
                     style={{ 
                       width: '60vw',
+                      marginRight: index === allSpecies.length - 1 ? '0' : '0.5vw',
                       transition: 'all 0.3s ease-in-out'
                     }}
                     onClick={() => {
-                      const container = scrollContainerRef.current;
-                      if (container && !isCenter) {
-                        // Calculate scroll position to center this card
-                        const cardWidth = container.clientWidth * 0.60; // 60vw
-                        const gap = container.clientWidth * 0.005; // 0.5vw
-                        const scrollPosition = index * (cardWidth + gap);
-                        container.scrollTo({ left: scrollPosition, behavior: 'smooth' });
-                        setCurrentIndex(index);
-                      } else if (isCenter) {
+                      if (!isCenter) {
+                        // Scroll this card into view
+                        const card = document.querySelector(`[data-card-index="${index}"]`);
+                        if (card) {
+                          card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                        }
+                      } else {
                         setSelectedCard(species);
                       }
                     }}
