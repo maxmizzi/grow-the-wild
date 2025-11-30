@@ -27,73 +27,38 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
-    let rafId: number;
     let scrollTimeout: NodeJS.Timeout;
     
     const handleScroll = () => {
-      // Cancel any pending animation frame
-      if (rafId) cancelAnimationFrame(rafId);
-      
-      // Use requestAnimationFrame for smooth updates
-      rafId = requestAnimationFrame(() => {
-        const containerCenter = container.scrollLeft + container.clientWidth / 2;
-        const cards = container.children[0].children;
-        
-        let closestIndex = 0;
-        let closestDistance = Infinity;
-        
-        for (let i = 0; i < cards.length; i++) {
-          const card = cards[i] as HTMLElement;
-          const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-          const distance = Math.abs(containerCenter - cardCenter);
-          
-          if (distance < closestDistance) {
-            closestDistance = distance;
-            closestIndex = i;
-          }
-        }
-        
-        if (closestIndex !== currentIndex) {
-          setCurrentIndex(closestIndex);
-        }
-      });
-      
-      // After scrolling stops, snap to the centered card
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
-        const containerCenter = container.scrollLeft + container.clientWidth / 2;
-        const cards = container.children[0].children;
+        // Find which card is actually closest to the center of the viewport
+        const containerRect = container.getBoundingClientRect();
+        const containerCenter = containerRect.left + containerRect.width / 2;
         
+        const cards = Array.from(container.querySelectorAll('[data-card-index]'));
         let closestIndex = 0;
         let closestDistance = Infinity;
         
-        for (let i = 0; i < cards.length; i++) {
-          const card = cards[i] as HTMLElement;
-          const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+        cards.forEach((card, index) => {
+          const cardRect = card.getBoundingClientRect();
+          const cardCenter = cardRect.left + cardRect.width / 2;
           const distance = Math.abs(containerCenter - cardCenter);
           
           if (distance < closestDistance) {
             closestDistance = distance;
-            closestIndex = i;
+            closestIndex = index;
           }
-        }
+        });
         
         if (closestIndex !== currentIndex) {
           setCurrentIndex(closestIndex);
         }
-        
-        // Snap to center the card properly
-        const closestCard = cards[closestIndex] as HTMLElement;
-        const cardCenter = closestCard.offsetLeft + closestCard.offsetWidth / 2;
-        const targetScroll = cardCenter - container.clientWidth / 2;
-        
-        container.scrollTo({ left: targetScroll, behavior: 'smooth' });
       }, 100);
     };
 
     container.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
-      if (rafId) cancelAnimationFrame(rafId);
       clearTimeout(scrollTimeout);
       container.removeEventListener('scroll', handleScroll);
     };
@@ -184,6 +149,7 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
                 return (
                   <div
                     key={species.id}
+                    data-card-index={index}
                     className="flex-shrink-0 snap-center"
                     style={{ 
                       width: '60vw',
