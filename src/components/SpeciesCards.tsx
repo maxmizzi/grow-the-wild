@@ -155,8 +155,7 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
                     className="flex-shrink-0 snap-center"
                     style={{ 
                       width: '60vw',
-                      marginRight: index === allSpecies.length - 1 ? '0' : '0.5vw',
-                      transition: 'all 0.3s ease-in-out'
+                      marginRight: index === allSpecies.length - 1 ? '0' : '2vw'
                     }}
                     onClick={() => {
                       if (!isCenter) {
@@ -175,9 +174,9 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
                       style={{
                         width: '100%',
                         aspectRatio: '3/4',
-                        opacity: isCenter ? 1 : 0.5,
-                        transform: isCenter ? 'scale(1)' : 'scale(0.75)',
-                        transition: 'all 0.3s ease-in-out'
+                        opacity: isCenter ? 1 : 0.6,
+                        filter: isCenter ? 'none' : 'brightness(0.85)',
+                        transition: 'opacity 0.2s ease-in-out, filter 0.2s ease-in-out'
                       }}
                     >
                       <img 
