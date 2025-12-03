@@ -54,7 +54,7 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
         if (closestIndex !== currentIndex) {
           setCurrentIndex(closestIndex);
         }
-      }, 50);
+      }, 100);
     };
 
     container.addEventListener('scroll', handleScroll, { passive: true });
@@ -136,30 +136,26 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
         <div className="md:hidden flex-1 min-h-0 flex flex-col">
           <div 
             ref={scrollContainerRef}
-            className="overflow-x-scroll overflow-y-hidden scrollbar-hide" 
+            className="overflow-x-scroll overflow-y-hidden snap-x snap-mandatory scrollbar-hide" 
             style={{ 
               scrollbarWidth: 'none', 
               msOverflowStyle: 'none',
               height: 'calc(60vw * 4 / 3)', // Lock to largest card height (3:4 aspect ratio)
-              scrollSnapType: 'x mandatory'
+              scrollPaddingLeft: 'calc((100vw - 60vw) / 2)',
+              scrollPaddingRight: 'calc((100vw - 60vw) / 2)'
             }}
           >
-            <div className="flex items-center h-full" style={{ 
-              paddingLeft: 'calc(50vw - 30vw)', 
-              paddingRight: 'calc(50vw - 30vw)',
-              gap: '2vw'
-            }}>
+            <div className="flex items-center h-full" style={{ paddingLeft: 'calc((100vw - 60vw) / 2)', paddingRight: 'calc((100vw - 60vw) / 2)' }}>
               {allSpecies.map((species, index) => {
                 const isCenter = index === currentIndex;
                 return (
                   <div
                     key={species.id}
                     data-card-index={index}
-                    className="flex-shrink-0"
+                    className="flex-shrink-0 snap-center"
                     style={{ 
                       width: '60vw',
-                      scrollSnapAlign: 'center',
-                      scrollSnapStop: 'always'
+                      marginRight: index === allSpecies.length - 1 ? '0' : '2vw'
                     }}
                     onClick={() => {
                       if (!isCenter) {
@@ -179,10 +175,8 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
                         width: '100%',
                         aspectRatio: '3/4',
                         opacity: isCenter ? 1 : 0.6,
-                        transform: isCenter ? 'scale(1)' : 'scale(0.7)',
-                        transformOrigin: 'center center',
-                        transition: 'opacity 0.2s ease-in-out, transform 0.2s ease-in-out',
-                        willChange: 'opacity, transform'
+                        filter: isCenter ? 'none' : 'brightness(0.85)',
+                        transition: 'opacity 0.2s ease-in-out, filter 0.2s ease-in-out'
                       }}
                     >
                       <img 
