@@ -182,7 +182,10 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
                         transform: isCenter ? 'scale(1)' : 'scale(0.7)',
                         transformOrigin: 'center center',
                         transition: 'opacity 0.2s ease-in-out, transform 0.2s ease-in-out',
-                        willChange: 'opacity, transform'
+                        // Only promote cards adjacent to the current one to compositor layers.
+                        // Applying willChange to all cards forces the GPU to allocate a layer
+                        // for every card simultaneously, wasting GPU memory and increasing power draw.
+                        willChange: Math.abs(index - currentIndex) <= 1 ? 'opacity, transform' : 'auto'
                       }}
                     >
                       <img 
@@ -242,6 +245,7 @@ export const SpeciesCards = ({ discovered }: SpeciesCardsProps) => {
                         src={species.imageUrl} 
                         alt={species.commonName}
                         className="w-full h-full object-cover"
+                        loading="lazy"
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = 'https://placehold.co/80x107/e8f5e9/264831?text=?';
                         }}
